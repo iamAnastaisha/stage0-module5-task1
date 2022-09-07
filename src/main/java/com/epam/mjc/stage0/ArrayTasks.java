@@ -124,7 +124,7 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public static int[][] sortRaggedArray(int[][] arr) {
-        int [][] newArr = new int[2][];
+        int [][] newArr = new int[arr.length][];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 int minInd = findMin(arr[i], j, arr[i].length);
@@ -134,11 +134,11 @@ public class ArrayTasks {
             }
         }
         for (int i = 0; i < arr.length; i++) {
-            int [] min = arr[0];
-            int minInd = arr[0].length;
-            for (int j = i; j < arr[i].length; j++) {
-                if (arr[j].length < min.length) {
-                    min = arr[j];
+            int min = arr[i].length;
+            int minInd = i;
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j].length < min) {
+                    min = arr[j].length;
                     minInd = j;
                 }
             }
@@ -147,17 +147,6 @@ public class ArrayTasks {
             arr[minInd] = help;
         }
         return arr;
-    }
-
-    public static void main (String [] args) {
-        int [][] arr = {{5, 4}, {7}};
-        int [][] newArr = sortRaggedArray(arr);
-        for (int i = 0; i < newArr.length; i++) {
-            for (int j = 0; j < newArr[i].length; j++) {
-                System.out.print(newArr[i][j]);
-            }
-            System.out.println("");
-        }
     }
 
     private static int findMin(int[] arr, int l, int r) {

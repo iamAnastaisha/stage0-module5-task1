@@ -149,7 +149,7 @@ public class ArrayTasks {
         int min = Integer.MAX_VALUE;
         int minInd = 0;
         for (int i = l; i < r; i++) {
-            if (arr[i] < min[) {
+            if (arr[i] < min) {
                 min = arr[i];
                 minInd = i;
             }

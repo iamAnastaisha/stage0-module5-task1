@@ -61,7 +61,7 @@ public class ArrayTasks {
     public int findIndexOfNumber(int[] arr, int number) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == number) {
-                return i + 1;
+                return i;
             }
         }
         return -1;
@@ -125,54 +125,35 @@ public class ArrayTasks {
      */
     public int[][] sortRaggedArray(int[][] arr) {
         int [][] newArr = new int[2][];
-        if (arr[0].length < arr[1].length) {
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                int minInd = findMin(arr[i], j, arr.length);
+                int help = arr[i][j];
+                arr[i][j] = arr[i][minInd];
+                arr[i][minInd] = help;
+            }
+        }
+
+        if (arr[0].length <= arr[1].length) {
             newArr[0] = arr[0];
             newArr[1] = arr[1];
         } else {
             newArr[0] = arr[1];
             newArr[1] = arr[0];
         }
-        for (int i = 0; i < 2; i++) {
-            mergeSort(newArr[i], newArr[i].length);
-        }
         return newArr;
     }
 
-    public void mergeSort(int[] arr, int n) {
-        if (n < 2) {
-            return;
-        }
-        int mid = n / 2;
-        int[] left = new int[mid];
-        int[] right = new int[n - mid];
-
-        for (int i = 0; i < mid; i++) {
-            left[i] = arr[i];
-        }
-        for (int i = mid; i < n; i++) {
-            right[i - mid] = arr[i];
-        }
-        mergeSort(left, mid);
-        mergeSort(right, n - mid);
-        mergeList(arr, left, right, mid, n - mid);
-    }
-
-    public void mergeList(
-            int[] arr, int[] l, int[] r, int left, int right) {
-        int i = 0, j = 0, k = 0;
-        while (i < left && j < right) {
-            if (l[i] <= r[j]) {
-                arr[k++] = l[i++];
-            }
-            else {
-                arr[k++] = r[j++];
+    private int findMin(int[] arr, int l, int r) {
+        int min = Integer.MAX_VALUE;
+        int minInd = 0;
+        for (int i = l; i < r; i++) {
+            if (arr[i] < min[) {
+                min = arr[i];
+                minInd = i;
             }
         }
-        while (i < left) {
-            arr[k++] = l[i++];
-        }
-        while (j < right) {
-            arr[k++] = r[j++];
-        }
+        return minInd;
     }
 }

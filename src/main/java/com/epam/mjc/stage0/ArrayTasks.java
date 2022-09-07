@@ -125,16 +125,14 @@ public class ArrayTasks {
      */
     public int[][] sortRaggedArray(int[][] arr) {
         int [][] newArr = new int[2][];
-
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                int minInd = findMin(arr[i], j, arr.length);
+                int minInd = findMin(arr[i], j, arr[i].length);
                 int help = arr[i][j];
                 arr[i][j] = arr[i][minInd];
                 arr[i][minInd] = help;
             }
         }
-
         if (arr[0].length <= arr[1].length) {
             newArr[0] = arr[0];
             newArr[1] = arr[1];

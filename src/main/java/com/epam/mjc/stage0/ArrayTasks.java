@@ -59,15 +59,9 @@ public class ArrayTasks {
      * arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-        int left = 0, right = arr.length;
-        while (left < right) {
-            int curr = (left + right) / 2;
-            if (number == arr[curr]) {
-                return curr + 1;
-            } else if (number < arr[curr]) {
-                right = curr;
-            } else {
-                left = curr + 1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == number) {
+                return i + 1;
             }
         }
         return -1;
@@ -135,8 +129,8 @@ public class ArrayTasks {
             newArr[0] = arr[0];
             newArr[1] = arr[1];
         } else {
-            newArr[1] = arr[0];
             newArr[0] = arr[1];
+            newArr[1] = arr[0];
         }
         for (int i = 0; i < 2; i++) {
             mergeSort(newArr[i], newArr[i].length);

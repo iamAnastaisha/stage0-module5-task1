@@ -28,7 +28,7 @@ public class ArrayTasks {
     public int[] generateNumbers(int length) {
         int[] array = new int[length];
         for (int i = 0; i < length; i++) {
-            array[i] = i;
+            array[i] = i + 1;
         }
         return array;
     }
@@ -63,7 +63,7 @@ public class ArrayTasks {
         while (left < right) {
             int curr = (left + right) / 2;
             if (number == arr[curr]) {
-                return curr;
+                return curr + 1;
             } else if (number < arr[curr]) {
                 right = curr;
             } else {
@@ -130,6 +130,55 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        return new int[2][2];
+        int [][] newArr = new int[2][];
+        if (arr[0].length < arr[1].length) {
+            newArr[0] = arr[0];
+            newArr[1] = arr[1];
+        } else {
+            newArr[1] = arr[0];
+            newArr[0] = arr[1];
+        }
+        for (int i = 0; i < 2; i++) {
+            mergeSort(newArr[i], newArr[i].length);
+        }
+        return newArr;
+    }
+
+    public void mergeSort(int[] arr, int n) {
+        if (n < 2) {
+            return;
+        }
+        int mid = n / 2;
+        int[] left = new int[mid];
+        int[] right = new int[n - mid];
+
+        for (int i = 0; i < mid; i++) {
+            left[i] = arr[i];
+        }
+        for (int i = mid; i < n; i++) {
+            right[i - mid] = arr[i];
+        }
+        mergeSort(left, mid);
+        mergeSort(right, n - mid);
+        mergeList(arr, left, right, mid, n - mid);
+    }
+
+    public void mergeList(
+            int[] arr, int[] l, int[] r, int left, int right) {
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (l[i] <= r[j]) {
+                arr[k++] = l[i++];
+            }
+            else {
+                arr[k++] = r[j++];
+            }
+        }
+        while (i < left) {
+            arr[k++] = l[i++];
+        }
+        while (j < right) {
+            arr[k++] = r[j++];
+        }
     }
 }

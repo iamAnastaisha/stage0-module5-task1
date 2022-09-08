@@ -123,7 +123,7 @@ public class ArrayTasks {
      * arr = [[3, 1, 2,], [3,2]] -> [[2, 3], [1, 2, 3]]
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
-    public static int[][] sortRaggedArray(int[][] arr) {
+    public int[][] sortRaggedArray(int[][] arr) {
         int [][] newArr = new int[arr.length][];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
@@ -134,22 +134,22 @@ public class ArrayTasks {
             }
         }
         for (int i = 0; i < arr.length; i++) {
-            int min = arr[i].length;
-            int minInd = i;
-            for (int j = i; j < arr.length; j++) {
-                if (arr[j].length < min) {
+            int min = Integer.MAX_VALUE;
+            int minInd = 0;
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j] != null && arr[j].length < min) {
                     min = arr[j].length;
                     minInd = j;
                 }
             }
-            int [] help = arr[i];
-            arr[i] = arr[minInd];
-            arr[minInd] = help;
+            newArr[i] = arr[minInd];
+            arr[minInd] = null;
         }
-        return arr;
+        return newArr;
     }
 
-    private static int findMin(int[] arr, int l, int r) {
+
+    private int findMin(int[] arr, int l, int r) {
         int min = Integer.MAX_VALUE;
         int minInd = 0;
         for (int i = l; i < r; i++) {
